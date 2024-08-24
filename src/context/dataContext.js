@@ -4,12 +4,11 @@ const DataContext = createContext({});
 
 export const DataProvider = ({children}) => {
   const [quizs, setQuizs] = useState([]);
-  const [question, setQuesion] = useState({});
+  const [question, setQuestion] = useState({});
   const [questionIndex, setQuestionIndex] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [marks, setMarks] = useState(0);
-
   const [showStart, setShowStart] = useState(true);
   const [showQuiz, setShowQuiz] = useState(false);
   const [showResult, setShowResult] = useState(false);
@@ -17,14 +16,17 @@ export const DataProvider = ({children}) => {
   useEffect(() => {
     fetch('quiz.json')
       .then(res => res.json())
-      .then(data => setQuizs(data))
+      .then(data => {
+        const shuffledQuestions = data.sort(() => 0.5 - Math.random());
+        setQuizs(shuffledQuestions.slice(0, 10));
+      });
   }, []);
 
   useEffect(() => {
     if (quizs.length > questionIndex) {
-      setQuesion(quizs[questionIndex]);
+      setQuestion(quizs[questionIndex]);
     }
-  }, [quizs, questionIndex])
+  }, [quizs, questionIndex]);
 
   const startQuiz = () => {
     setShowStart(false);

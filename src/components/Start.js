@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import DataContext from '../context/dataContext';
 
 const Start = () => {
-    const { startQuiz, showStart, toggleTheme } = useContext(DataContext);
+    const { startQuiz, showStart } = useContext(DataContext);
     return (
       <section
         className="text-white text-center bg-dark"
@@ -15,7 +15,7 @@ const Start = () => {
                 <button
                   onClick={startQuiz}
                   className="btn px-4 py-2 bg-light text-dark fw-bold"
-                >
+                > 
                   Start Quiz
                 </button>
             </div>
